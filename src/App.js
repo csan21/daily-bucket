@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { database } from './firebase';
+import { auth, database } from './firebase';
+import CurrentUser from './CurrentUser';
+import SignIn from './SignIn';
 import rlogo from './rlogo.svg';
 import flogo from './flogo.svg';
 import './App.css';
@@ -9,34 +11,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
-      newData: ''
+      currentUser: null
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    database.ref('/').on('value', snapshot => {
-      this.setState({
-        data: snapshot.val()
-      });
+    auth.onAuthStateChanged(currentUser => {
+      this.setState({ currentUser });
     });
-  }
-
-  handleChange(event) {
-    const newData = event.target.value;
-    this.setState({
-      newData
-    });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const newData = database.ref().child('NEWNEW').push(this.state.newData);
   }
 
   render() {
+    const { currentUser } = this.state;
+
     return (
       <div className="App">
         <div className="App-header">
@@ -45,14 +32,11 @@ class App extends Component {
           <div className="App-title">
             <h1>Daily Bucket</h1>
           </div>
+          <div>
+            {!currentUser && <SignIn />}
+            {currentUser && <CurrentUser user={currentUser} />}
+          </div>
         </div>
-        <pre className="App-intro">
-          {JSON.stringify(this.state.data, 2)}
-        </pre>
-        <form className="App-form" onSubmit={this.handleSubmit}>
-          <input type="text" onChange={this.handleChange} />
-          <input type="submit" />
-        </form>
       </div>
     );
   }
