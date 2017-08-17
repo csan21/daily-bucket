@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { auth, database } from './firebase';
+import { auth, database } from '../firebase';
 import CurrentUser from './CurrentUser';
 import SignIn from './SignIn';
 import ChoreNew from './ChoreNew';
 import ChoreList from './ChoreList';
-import rlogo from './rlogo.svg';
-import flogo from './flogo.svg';
-import './App.css';
-import './index.css';
+import rlogo from '../images/rlogo.svg';
+import flogo from '../images/flogo.svg';
+import '../styles/index.css';
 
 class App extends Component {
   constructor(props) {
@@ -19,11 +18,15 @@ class App extends Component {
     this.choreRef = database.ref('/chores');
   }
 
-  componentWillMount() {
-    auth.onAuthStateChanged(currentUser => {
-      this.setState({
-        currentUser: currentUser
-      });
+  componentDidMount() {
+    auth.onAuthStateChanged(function(currentUser) {
+      if (currentUser) {
+        console.log(currentUser);
+        this.setState({ currentUser });
+      } else {
+        console.log('login fail');
+      }
+
       this.choreRef.on('value', snapshot => {
         this.setState({ chores: snapshot.val() });
       });

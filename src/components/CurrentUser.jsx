@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import { auth } from './firebase';
-import './CurrentUser.css';
+import { auth } from '../firebase';
+import '../styles/index.css';
 
 const CurrentUser = ({ user }) => {
   return (

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { database } from './firebase';
-import './ChoreNew.css';
+import { database } from '../firebase';
+import '../styles/index.css';
 
 class ChoreNew extends Component {
   constructor() {
