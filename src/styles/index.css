@@ -151,14 +151,13 @@ input:not([type="submit"]) {
   border: 1px solid #ccc;
   margin-bottom: 0.5em;
   padding: 1em 0.5em;
-  width: 100%;
+  width: 50%;
 }
 
 /* app */
-
 .app {
   margin: 0 auto;
-  width: 70%;
+  width: 50%;
   height: 100%;
   background-color: #555;
 }
@@ -188,9 +187,21 @@ input:not([type="submit"]) {
 }
 
 .app-intro {
+  width: auto;
+  margin: 0 auto;
+  padding-top: 20px;
   text-align: center;
   font-size: 16px;
   color: white;
+}
+
+.app-intro ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.app-intro li {
+  margin: 0 auto;
 }
 
 .app-form {
@@ -205,5 +216,20 @@ input:not([type="submit"]) {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+  .app {
+    width: 100%;
+  }
+
+  .app-logo {
+    animation: app-logo-spin infinite 20s linear;
+    height: 40px;
+  }
+
+  .app-title h1 {
+    font-size: 20px;
   }
 }
