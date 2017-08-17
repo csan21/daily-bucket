@@ -153,3 +153,102 @@ input:not([type="submit"]) {
   padding: 1em 0.5em;
   width: 100%;
 }
+
+/* APP */
+
+.App {
+  margin: 0 auto;
+  width: 70%;
+  height: 100%;
+  background-color: #555;
+}
+
+.App-header {
+  background-color: #222;
+  height: 120px;
+  width: 100%;
+  padding: 20px;
+  color: white;
+  display: flex;
+  justify-content: left;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-title {
+  margin-left: 40px;
+}
+
+.App-title h1 {
+  font-size: 36px;
+  line-height: 40px;
+}
+
+.App-intro {
+  text-align: center;
+  font-size: 16px;
+  color: white;
+}
+
+.App-form {
+  text-align: center;
+  font-size: 16px;
+  color: white;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* CHORE */
+
+.Chore {
+  margin: 1em;
+  min-width: 200px;
+  text-align: center;
+  border: 1px solid #eee;
+  padding: 1em;
+}
+
+.Chore-name {
+  margin-top: 0;
+}
+
+/* */
+
+.ChoreList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* */
+
+.ChoreNew {
+  margin-bottom: 2em;
+}
+
+/* */
+
+.CurrentUser {
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+}
+
+.CurrentUser-info {
+  padding: 1em;
+  flex: 1;
+}
+
+.CurrentUser-photo {
+  max-height: 150px;
+}
