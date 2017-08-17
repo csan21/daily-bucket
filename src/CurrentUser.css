@@ -4,11 +4,11 @@
   justify-content: space-between;
 }
 
-.CurrentUser--identification {
+.CurrentUser-info {
   padding: 1em;
   flex: 1;
 }
 
-.CurrentUser--photo {
+.CurrentUser-photo {
   max-height: 150px;
 }

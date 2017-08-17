@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { auth, database } from './firebase';
 import CurrentUser from './CurrentUser';
 import SignIn from './SignIn';
+import ChoreNew from './ChoreNew';
+import ChoreList from './ChoreList';
 import rlogo from './rlogo.svg';
 import flogo from './flogo.svg';
 import './App.css';
@@ -11,18 +13,25 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: null
+      currentUser: null,
+      chores: null
     };
+    this.choreRef = database.ref('/chores');
   }
 
-  componentDidMount() {
+  componentWillMount() {
     auth.onAuthStateChanged(currentUser => {
-      this.setState({ currentUser });
+      this.setState({
+        currentUser: currentUser
+      });
+      this.choreRef.on('value', snapshot => {
+        this.setState({ chores: snapshot.val() });
+      });
     });
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser, chores } = this.state;
 
     return (
       <div className="App">
@@ -32,10 +41,15 @@ class App extends Component {
           <div className="App-title">
             <h1>Daily Bucket</h1>
           </div>
-          <div>
-            {!currentUser && <SignIn />}
-            {currentUser && <CurrentUser user={currentUser} />}
-          </div>
+        </div>
+        <div className="App-intro">
+          {!currentUser && <SignIn />}
+          {currentUser &&
+            <div>
+              <ChoreList chores={chores} user={currentUser} />
+              <CurrentUser user={currentUser} />
+              <ChoreNew />
+            </div>}
         </div>
       </div>
     );
