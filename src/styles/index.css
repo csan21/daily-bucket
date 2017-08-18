@@ -219,17 +219,18 @@ input:not([type="submit"]) {
   }
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
   .app {
     width: 100%;
   }
 
   .app-logo {
     animation: app-logo-spin infinite 20s linear;
-    height: 40px;
+    height: 2.5em;
+    margin-top: 20px
   }
 
   .app-title h1 {
-    font-size: 20px;
+    font-size: 2em;
   }
 }
