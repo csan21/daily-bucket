@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import rlogo from './images/rlogo.svg';
-import flogo from './images/flogo.svg';
+
+import Header from './Header';
+import TodoItem from './TodoItem';
+import NewTodoItem from './NewTodoItem';
+
 import './styles/index.css';
 
 var allItems = [];
@@ -13,6 +16,8 @@ allItems.push('Dinner with parents');
 class App extends Component {
   constructor(props) {
     super(props);
+    console.log(props, 'APP PROPS');
+
     this.state = {
       allItems
     };
@@ -36,50 +41,6 @@ class App extends Component {
   addEvent(todoItem) {
     allItems.push(todoItem.newItem);
     this.setState({ allItems });
-  }
-}
-
-class TodoItem extends Component {
-  render() {
-    return <div>{this.props.item}</div>;
-  }
-}
-
-class NewTodoItem extends Component {
-  constructor(props) {
-    super(props);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-  componentDidMount() {
-    ReactDOM.findDOMNode(this.refs.itemName).focus();
-  }
-  render() {
-    return (
-      <form onSubmit={this.onSubmit}>
-        <input ref="itemName" type="text" placeholder="Add to your day" />
-      </form>
-    );
-  }
-  onSubmit(event) {
-    event.preventDefault();
-    var input = ReactDOM.findDOMNode(this.refs.itemName);
-    var newItem = input.value;
-    this.props.addEvent({ newItem });
-    input.value = '';
-  }
-}
-
-class Header extends Component {
-  render() {
-    return (
-      <div className="app-header">
-        <img src={rlogo} className="app-logo" alt="logo" />
-        <img src={flogo} className="app-logo" alt="logo" />
-        <div className="app-title">
-          <h1>Daily Bucket</h1>
-        </div>
-      </div>
-    );
   }
 }
 
