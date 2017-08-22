@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import List from './List';
 import Header from './Header';
+import axios from 'axios';
 
 class App extends Component {
   constructor(props) {
@@ -8,22 +9,26 @@ class App extends Component {
 
     this.state = {
       item: '',
-      list: ['hello', 'nope']
+      list: []
     };
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
   }
 
-  onChange(event) {
+  componentDidMount() {
+    axios
+      .get('https://jsonplaceholder.typicode.com/todos')
+      .then(function(response) {
+        console.log(response.data);
+      });
+  }
+
+  onChange = event => {
     this.setState({ item: event.target.value });
-  }
+  };
 
-  onSubmit(event) {
+  onSubmit = event => {
     event.preventDefault();
-    this.setState({
-      list: this.state.list.concat(this.state.item)
-    });
-  }
+    this.setState({ list: this.state.list.concat(this.state.item) });
+  };
 
   render() {
     return (
